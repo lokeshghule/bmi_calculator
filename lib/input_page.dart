@@ -1,4 +1,6 @@
+import 'package:bmi_calculator/calculator_brain.dart';
 import 'package:bmi_calculator/constants.dart';
+import 'package:bmi_calculator/result_page.dart';
 import 'package:flutter/material.dart';
 import 'gender_icon.dart';
 import 'reusable_card.dart';
@@ -157,6 +159,7 @@ class _InputPageState extends State<InputPage> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               FloatingActionButton(
+                                heroTag: 'btn1',
                                 onPressed: () {
                                   setState(() {
                                     weight++;
@@ -172,6 +175,7 @@ class _InputPageState extends State<InputPage> {
                                 width: 8.0,
                               ),
                               FloatingActionButton(
+                                heroTag: 'btn2',
                                 onPressed: () {
                                   setState(() {
                                     weight--;
@@ -217,6 +221,7 @@ class _InputPageState extends State<InputPage> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               FloatingActionButton(
+                                heroTag: 'btn3',
                                 onPressed: () {
                                   setState(() {
                                     age++;
@@ -232,6 +237,7 @@ class _InputPageState extends State<InputPage> {
                                 width: 8.0,
                               ),
                               FloatingActionButton(
+                                heroTag: 'btn4',
                                 onPressed: () {
                                   setState(() {
                                     age--;
@@ -255,10 +261,37 @@ class _InputPageState extends State<InputPage> {
             SizedBox(
               height: h * 0.02,
             ),
-            Container(
-              color: kBottomContainterColor,
-              width: double.infinity,
-              height: h * 0.09,
+            GestureDetector(
+              onTap: () {
+                CalculatorBrain brain =
+                    CalculatorBrain(height: height, weight: weight);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ResultPage(
+                      result: brain.getResult(),
+                      description: brain.getDescription(),
+                      bmiValue: brain.getBmiValue(),
+                      resultColor: brain.getResultColor(),
+                    ),
+                  ),
+                );
+              },
+              child: Container(
+                child: Center(
+                  child: Padding(
+                    padding: EdgeInsets.only(bottom: 5.0),
+                    child: Text(
+                      "CALCULATE",
+                      style: TextStyle(
+                          fontSize: 22.0, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ),
+                color: kBottomContainterColor,
+                width: double.infinity,
+                height: h * 0.09,
+              ),
             )
           ],
         ),
