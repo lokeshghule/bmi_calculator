@@ -45,15 +45,18 @@ class ResultPage extends StatelessWidget {
                   children: [
                     Text(
                       result,
+                      textAlign: TextAlign.center,
                       style: kLabelTextStyle.copyWith(
                           color: resultColor, fontSize: 20.0),
                     ),
                     Text(
                       bmiValue,
+                      textAlign: TextAlign.center,
                       style: kNumberTextStyle.copyWith(fontSize: 80.0),
                     ),
                     Text(
                       description,
+                      textAlign: TextAlign.center,
                       style: kLabelTextStyle.copyWith(
                           color: Colors.white, fontSize: 20.0),
                     )
